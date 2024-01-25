@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   const [Length, setLength] = useState(8);
@@ -18,13 +19,23 @@ function App() {
     }
     setPassword(pas);
   }, [Length, numAllowed, charAllowed]);
-
+const copy=()=>{
+  window.navigator.clipboard.writeText(Password);
+  toast.success('Password Copied');
+}
   return (
+  <>
+  
+  <div>
+      <Toaster />
+    </div>
     <div className="main">
       <h1 className="heading">Password Generator</h1>
       <div className="password">
         <input type="text" value={Password} placeholder="password" readOnly />
-        <button>Copy</button>
+        <button
+        onClick={copy}
+        >Copy</button>
       </div>
       <div className="second">
         <div className="range">
@@ -64,6 +75,7 @@ function App() {
         </div>
       </div>
     </div>
+  </>
   );
 }
 
